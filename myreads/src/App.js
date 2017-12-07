@@ -35,12 +35,16 @@ class BooksApp extends React.Component {
     })
   }
   handleSearchChange = (searchText) =>{
+    if(searchText.trim()==""){
+      this.setState({searchbooks:[]});
+    }else{
     this.doLoader(true);
     BooksAPI.search(searchText.trim()).then((books) => {
       let searchbooks = books.error?[]:books;
       this.setState({searchbooks});
       this.doLoader(false);
-    })
+    });
+  }
   }
   render() {
     return (
