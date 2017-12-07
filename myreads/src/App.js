@@ -9,6 +9,7 @@ import Search from './components/Search'
 class BooksApp extends React.Component {
   state = {
     books: [],
+    searchbooks: [],
     isFetching:false
   }
   
@@ -34,16 +35,11 @@ class BooksApp extends React.Component {
     })
   }
   handleSearchChange = (searchText) =>{
-     this.doLoader(true);
-   var searchTerm = searchText.trim()
-    BooksAPI.search(searchText).then((books) => {
-    
-      if(books.error){
-        this.setState({books:[] });
-      }else{
-       this.setState({books });
-      }
-       this.doLoader(false);
+    this.doLoader(true);
+    BooksAPI.search(searchText.trim()).then((books) => {
+      let searchbooks = books.error?[]:books;
+      this.setState({searchbooks});
+      this.doLoader(false);
     })
   }
   render() {
@@ -52,7 +48,7 @@ class BooksApp extends React.Component {
         <div className="app">
          
           <Route path='/search' render={({history}) => (
-            <Search isFetching={this.state.isFetching}  handleShelfChange={this.handleShelfChange}  books={this.state.books} handleSearchChange={this.handleSearchChange} />
+            <Search isFetching={this.state.isFetching}  handleShelfChange={this.handleShelfChange}  books={this.state.searchbooks} handleSearchChange={this.handleSearchChange} />
           )} />
           <Route exact path='/' render={() => (
             

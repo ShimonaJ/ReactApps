@@ -13,7 +13,7 @@ class Search extends Component{
   }
 render(){
     const {handleSearchChange,books,handleShelfChange,isFetching} = this.props;
-       return <div className="search-books">
+       return  <div className="search-books">
             <div className="search-books-bar">
               <Link to="/" className="close-search" >Close</Link>
               <div className="search-books-input-wrapper">
@@ -31,6 +31,7 @@ render(){
             </div>
             }
           </div>
+         
  }
 }
 export default Search

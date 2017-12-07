@@ -11,11 +11,11 @@ static propTypes = {
     render(){
         let {books,title,handleShelfChange} = this.props;
         console.log(books.length);
-        return <div className="list-books-content">
+        return <div className="container  list-books-content">
               
                 <div className="bookshelf">
-                  <h2 className="bookshelf-title">{title}</h2>
-                  <div className="bookshelf-books">
+                <div className="panel-title">  <h3 className="bookshelf-title">{title}</h3></div>
+                  <div className="panel-content bookshelf-books">
                     <ol className="books-grid">
                         {books.map((book) => (
                              <BookListItem  key={book.id} book={book} handleShelfChange={handleShelfChange}/>

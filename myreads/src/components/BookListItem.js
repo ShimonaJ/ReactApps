@@ -12,9 +12,9 @@ class BookListItem extends Component{
     return <li key={book.id}>
                         <div className="book">
                           <div className="book-top">
-                            <div draggable  className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+(book.imageLinks?book.imageLinks.thumbnail:'')+')' }}></div>
+                            <div   className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+(book.imageLinks?book.imageLinks.thumbnail:'')+')' }}></div>
                             <div className="book-shelf-changer">
-                              <select onChange={(e) =>handleShelfChange(book,e.target.value) } value={book.shelf}>
+                              <select  onChange={(e) =>handleShelfChange(book,e.target.value) } value={book.shelf}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
