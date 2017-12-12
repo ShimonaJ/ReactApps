@@ -1,15 +1,9 @@
-import React,{Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-class BookListItem extends Component{
-  static propTypes = {
-    book: PropTypes.object.isRequired,
-    handleShelfChange: PropTypes.func.isRequired
-    
-  }
-    render(){
-        let {book,handleShelfChange} = this.props;
-        
-    return <li key={book.id}>
+const BookListItem = (props) => {
+
+  let {book,handleShelfChange} = props;
+  return <li key={book.id}>
                         <div className="book">
                           <div className="book-top">
                             <div   className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url('+(book.imageLinks?book.imageLinks.thumbnail:'')+')' }}></div>
@@ -28,5 +22,9 @@ class BookListItem extends Component{
                         </div>
                       </li>
 }
-}
+BookListItem.propTypes = {
+    book: PropTypes.object.isRequired,
+    handleShelfChange: PropTypes.func.isRequired
+    
+  }
 export default BookListItem

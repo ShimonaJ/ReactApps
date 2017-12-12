@@ -10,57 +10,85 @@ class BooksApp extends React.Component {
   state = {
     books: [],
     searchbooks: [],
-    isFetching:false
+    isFetching: false,
+    searchText: ''
   }
-  
+
   componentDidMount() {
-   
+    this.state = {
+      books: [],
+      searchbooks: [],
+      isFetching: false,
+      searchText: ''
+    }
     this.findAllBooks();
+
   }
-  doLoader(show){
-      this.setState({ isFetching:show })
+  doLoader(show) {
+    if(this.state.isFetching !== show){
+      this.setState({ isFetching: show })
+    }
   }
-  findAllBooks=()=>{
-    this.doLoader(true);
+  findAllBooks = () => {
+    
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
-      this.doLoader(false);
+      if (this.state.searchText !== '') { 
+         this.handleSearchChange(this.state.searchText);
+      }
+     
+
     })
   }
-  handleShelfChange=(book,value)=>{
+  handleShelfChange = (book, value) => {
+    if (this.state.searchText === '') { 
       this.doLoader(true);
-    BooksAPI.update(book,value).then((response) => {
+    }
+    BooksAPI.update(book, value).then((response) => {
       this.findAllBooks();
+    if (this.state.searchText === '') { 
       this.doLoader(false);
+    }
     })
   }
-  handleSearchChange = (searchText) =>{
-    if(searchText.trim()==""){
-      this.setState({searchbooks:[]});
-    }else{
-    this.doLoader(true);
-    BooksAPI.search(searchText.trim()).then((books) => {
-      let searchbooks = books.error?[]:books;
-      this.setState({searchbooks});
-      this.doLoader(false);
-    });
-  }
+  handleSearchChange = (searchText) => {
+    this.setState({ searchText: searchText });
+    if (searchText.trim() === "") {
+      this.setState({ searchbooks: [] });
+    } else {
+
+      this.doLoader(true);
+      BooksAPI.search(searchText.trim()).then((books) => {
+        let searchbooks = books.error ? [] : books;
+        let found = [];
+        searchbooks = searchbooks.map((item) => {
+          found = this.state.books.filter((bookitem) => item.id === bookitem.id);
+          item.shelf = found.length > 0 ? found[0].shelf : "none";
+          return item;
+
+        }
+        );
+
+        this.setState({ searchbooks });
+        this.doLoader(false);
+      });
+    }
   }
   render() {
     return (
       <Router>
         <div className="app">
-         
+
           <Route path='/search' render={({history}) => (
-            <Search isFetching={this.state.isFetching}  handleShelfChange={this.handleShelfChange}  books={this.state.searchbooks} handleSearchChange={this.handleSearchChange} />
+            <Search isFetching={this.state.isFetching} handleShelfChange={this.handleShelfChange} books={this.state.searchbooks} handleSearchChange={this.handleSearchChange} />
           )} />
           <Route exact path='/' render={() => (
-            
-             <BookComponent isFetching={this.state.isFetching} handleShelfChange={this.handleShelfChange} books={this.state.books} />
-             
+
+            <BookComponent isFetching={this.state.isFetching} handleShelfChange={this.handleShelfChange} books={this.state.books} />
+
           )} />
-              
-         
+
+
         </div>
       </Router>
     )
