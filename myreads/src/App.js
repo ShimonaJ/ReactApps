@@ -1,8 +1,9 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import {Switch, BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css'
 import BookComponent from './components/BookComponent'
+import NoMatch from './components/NoMatch'
 import Search from './components/Search'
 
 
@@ -15,12 +16,6 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    this.state = {
-      books: [],
-      searchbooks: [],
-      isFetching: false,
-      searchText: ''
-    }
     this.findAllBooks();
 
   }
@@ -37,7 +32,6 @@ class BooksApp extends React.Component {
          this.handleSearchChange(this.state.searchText);
       }
      
-
     })
   }
   handleShelfChange = (book, value) => {
@@ -78,7 +72,7 @@ class BooksApp extends React.Component {
     return (
       <Router>
         <div className="app">
-
+<Switch>
           <Route path='/search' render={({history}) => (
             <Search isFetching={this.state.isFetching} handleShelfChange={this.handleShelfChange} books={this.state.searchbooks} handleSearchChange={this.handleSearchChange} />
           )} />
@@ -87,8 +81,8 @@ class BooksApp extends React.Component {
             <BookComponent isFetching={this.state.isFetching} handleShelfChange={this.handleShelfChange} books={this.state.books} />
 
           )} />
-
-
+<Route component={NoMatch}/>
+</Switch>
         </div>
       </Router>
     )

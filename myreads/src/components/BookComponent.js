@@ -4,7 +4,7 @@ import BookList from './BookList'
 import PropTypes from 'prop-types'
 import Loader from 'react-loader';
 import options from '../const'
-
+import Header from './common/Header'
 const BookComponent = (props) => {
 
     let {books, handleShelfChange, isFetching} = props;
@@ -13,12 +13,7 @@ const BookComponent = (props) => {
     let wantToRead = books.filter((item) => item.shelf === "wantToRead");
 
     return <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header className="mdl-layout__header">
-            <div className="mdl-layout__header-row">
-                <span className="mdl-layout-title">My Reads</span>
-                <div className="mdl-layout-spacer"></div>
-            </div>
-        </header>
+         <Header></Header>
         <main className="mdl-layout__content">
             <div className="page-content">
                 <div className="list-books">
