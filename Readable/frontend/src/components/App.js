@@ -4,7 +4,7 @@ import { fetchPosts, fetchCategories,   selectCategory, selectSortBy } from '../
 import { fetchComments } from '../actions/comment'
 import {muiStyle} from '../utils/constants'
 import Category from '../components/category/Category'
-import Posts from '../components/post/Posts'
+import {Posts} from '../components/post/Posts'
 import Post from '../components/post/Post';
 import { Link } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
