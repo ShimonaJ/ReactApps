@@ -14,16 +14,17 @@ export const posts = createSelector(
     // session with the value returned by `ormSelector` and passes
     // that Session instance as an argument instead.
     // So `orm` below is a Session instance.
+  
     ormSelector,
     state => state.selectedCategory,
      state =>state.sortBy,
     //schema.createSelector((orm, categoryId) => {
     ormCreateSelector(orm, (session, selectedCategory,sortBy) => {
         console.log('Running todos selector' +sortBy);
-        
+          debugger;
         let obj =session.Post.all();
         
-        if(selectedCategory!==undefined && selectedCategory!==""){
+        if(selectedCategory!==undefined && selectedCategory!=="" && selectedCategory!=="all"){
             obj = obj.filter({ category: selectedCategory });
         }
         return obj.toModelArray().map(post => {
@@ -64,6 +65,6 @@ export const categories = createSelector(
 
         // `.toRefArray` returns a new Array that includes
         // direct references to each User object in the state.
-        return session.Category.all().toRefArray();
+        return session.Category.all().toRefArray()[0];
     })
 );

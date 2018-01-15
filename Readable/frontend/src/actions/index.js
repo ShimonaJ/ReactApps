@@ -1,14 +1,6 @@
 import * as APIUtil from '../utils/api';
-export const GET_POSTS = 'GET_POSTS'
-export const GET_CATEGORIES = 'GET_CATEGORIES'
-export const VOTE = 'VOTE'
 
-export const UPDATE_POST = 'UPDATE_POST'
-export const ADD_POST = 'ADD_POST'
-export const DELETE_POST ='DELETE_POST'
-export const SELECT_CATEGORY ='SELECT_CATEGORY'
-export const SORT_BY ='SORT_BY'
-
+import {GET_POSTS,GET_CATEGORIES,VOTE,GET_COMMENTS,UPDATE_POST,ADD_POST,DELETE_POST,SELECT_CATEGORY,SORT_BY} from './types'
 
 
 export const receiveCategories = resp => ({
@@ -112,4 +104,15 @@ export const receiveOnSortBy = (name) => {
 }
 export const selectSortBy = (name) => dispatch => (
   dispatch(receiveOnSortBy(name))
+);
+export const receiveComments = (resp,item) => ({
+  type: GET_COMMENTS,
+  payload:{comments:resp,post:item}
+});
+
+export const fetchComments = (item) => dispatch => (
+  APIUtil
+      .fetchComments(item)
+      .then(resp => resp.json())
+      .then(resp => dispatch(receiveComments(resp,item)))
 );

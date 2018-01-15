@@ -9,7 +9,7 @@ export default function bootstrap(orm) {
     // Return the whole Redux initial state.
     return {
         orm: session.state,
-        selectedCategory:'',
+        selectedCategory:'all',
         sortBy:'timestamp'
     };
 }

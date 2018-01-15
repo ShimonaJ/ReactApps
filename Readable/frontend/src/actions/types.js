@@ -1,0 +1,15 @@
+export const GET_POSTS = 'GET_POSTS'
+export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const VOTE = 'VOTE'
+export const GET_COMMENTS ='GET_COMMENTS'
+export const UPDATE_POST = 'UPDATE_POST'
+export const ADD_POST = 'ADD_POST'
+export const DELETE_POST ='DELETE_POST'
+export const SELECT_CATEGORY ='SELECT_CATEGORY'
+export const SORT_BY ='SORT_BY'
+
+export const ADD_COMMENT ='ADD_COMMENT'
+export const UPDATE_COMMENT ='UPDATE_COMMENT'
+
+export const VOTE_ON_COMMENT = 'VOTE_ON_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'

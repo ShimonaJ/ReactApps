@@ -36,7 +36,7 @@ const PostForm = (props) => {
                     floatingLabelText="Category" onChange={(e, index, value) => updateField('category', value)}
                     floatingLabelFixed={true}>
 
-                    {categories[0] !== undefined && Object.values(categories[0]).map((op) => <MenuItem key={op.name} value={op.name} primaryText={op.name}></MenuItem>)}
+                    {categories !== undefined && Object.values(categories).map((op,index) => <MenuItem key={index} value={op.name} primaryText={op.name}></MenuItem>)}
                 </SelectField></div>}>
             <Paper style={{ float: 'right' }} zDepth={0}><IconButton onClick={() => onUpdate(editItem)}> <ContentSave color={lightBlack} /></IconButton>
                 <IconButton> <NavigationClose onClick={() => onEditClose()} color={lightBlack} /></IconButton></Paper>

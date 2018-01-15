@@ -7,7 +7,7 @@ import CommentForm from './CommentForm'
 import CommentCard from './CommentCard'
 import { DummyComment } from '../../utils/constants'
 import uuidv1 from 'uuid/v1'
-import { voteOnComment, addComment, updateComment ,deleteComment} from '../../actions/comment'
+import * as action from '../../actions/comment'
 class Comments extends Component {
   state = {
     actionMode: '', //'','edit'
@@ -31,6 +31,7 @@ class Comments extends Component {
 
     let obj = this.state.editItem;
     obj.id = uuidv1();
+    obj.parentId = this.props.post.id;
     obj.timestamp = Date.now();
     this.props.addComment(this.props.post, obj);
     this.setState(prevState => ({
@@ -85,16 +86,7 @@ onDelete = (item) => {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    addComment: (post, data) => dispatch(addComment(post, data)),
-    updateComment: (post, data) => dispatch(updateComment(post, data)),
-    deleteComment: ( data) => dispatch(deleteComment( data)),
-    voteOnComment: (item, val) => dispatch(voteOnComment(item, val))
-  }
-}
-
 export default connect(
   state => state,
-  mapDispatchToProps
+  action
 )(Comments)

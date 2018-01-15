@@ -3,13 +3,10 @@ import {ORM,fk, many, attr, Model} from 'redux-orm';
 import {
     GET_POSTS,
     GET_CATEGORIES,
-    VOTE,ADD_POST,DELETE_POST,UPDATE_POST
+    VOTE,ADD_POST,DELETE_POST,UPDATE_POST,GET_COMMENTS,ADD_COMMENT,VOTE_ON_COMMENT,UPDATE_COMMENT,DELETE_COMMENT
     
-} from '../actions/index';
-import {
-    
-    ADD_COMMENT,GET_COMMENTS,VOTE_ON_COMMENT,UPDATE_COMMENT,DELETE_COMMENT
-} from '../actions/comment';
+} from '../actions/types';
+
 export class Post extends Model {
     toString() {
         return `Post: ${this.title}`;
@@ -70,8 +67,9 @@ export class Post extends Model {
             SessionSpecificMyModel.withId(payload.post.id).comments.add(payload.comment);
             break;
          case DELETE_COMMENT:
+         debugger;
             SessionSpecificMyModel.withId(payload.parentId).commentCount--;
-            //SessionSpecificMyModel.withId(payload.post.id).comments.delete(payload.comment);
+            SessionSpecificMyModel.withId(payload.parentId).comments.delete(payload.comment);
             break;
         }
 

@@ -10,12 +10,12 @@ const Category = (props) =>{
     return <Drawer width={250} containerStyle={    {margin: '80px 20px 20px 20px',
     padding: '25px',height:'450px'}} open={true}>
         <Subheader >Categories </Subheader>
-        {categories[0]!==undefined?
-     Object.values(categories[0]).map((item)=>
+        {categories!==undefined?
+     Object.values(categories).map((item,index)=>
     
-    <MenuItem  key={item.name} onClick={(e)=>OnCategorySelect(e,item.name)}  >
-        <Link  style={{color:selectedCategory===item.name?props.muiTheme.palette.accent1Color:props.muiTheme.palette.textColor}}  to="/">{item.name}</Link>
-     </MenuItem>):''}
+    <MenuItem  key={index} onClick={(e)=>OnCategorySelect(e,item.name)}  >
+        <Link  style={{color:selectedCategory===item.name?props.muiTheme.palette.accent1Color:props.muiTheme.palette.textColor}}  to={'/'+(selectedCategory===item.name?"all":item.name)}>{item.name}</Link>
+     </MenuItem>):' '}
      </Drawer>
 }
 export default muiThemeable()(Category);

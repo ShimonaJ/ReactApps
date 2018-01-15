@@ -1,20 +1,6 @@
 import * as APIUtil from '../utils/api';
-export const ADD_COMMENT ='ADD_COMMENT'
-export const UPDATE_COMMENT ='UPDATE_COMMENT'
-export const GET_COMMENTS ='GET_COMMENTS'
-export const VOTE_ON_COMMENT = 'VOTE_ON_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
-export const receiveComments = (resp,item) => ({
-  type: GET_COMMENTS,
-  payload:{comments:resp,post:item}
-});
 
-export const fetchComments = (item) => dispatch => (
-  APIUtil
-      .fetchComments(item)
-      .then(resp => resp.json())
-      .then(resp => dispatch(receiveComments(resp,item)))
-);
+import {ADD_COMMENT,UPDATE_COMMENT,VOTE_ON_COMMENT,DELETE_COMMENT} from './types'
 export const receiveOnVoteOnComment = (resp) => {
  // item.voteScore = resp.voteScore;
  return {
