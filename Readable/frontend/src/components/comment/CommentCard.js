@@ -3,6 +3,7 @@ import { ListItem } from 'material-ui/List';
 import {  lightBlack } from 'material-ui/styles/colors';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import Moment from 'react-moment';
+import PropTypes from 'prop-types'
 import LikeComponent from '../common/LikeComponent'
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
@@ -51,5 +52,15 @@ const CommentCard = (props) => {
         </div>
 
     </ListItem>}</div>
+}
+CommentCard.propTypes = {
+        editItem: PropTypes.object,
+        item: PropTypes.object.isRequired,
+        onLikeComment: PropTypes.func.isRequired,
+        onEditClick: PropTypes.func.isRequired,
+        editMode: PropTypes.func.isRequired,
+        updateField: PropTypes.func.isRequired,
+        onUpdateComment: PropTypes.func.isRequired,
+        onDeleteClick: PropTypes.func.isRequired
 }
 export default CommentCard

@@ -98,8 +98,9 @@ export class Category extends Model {
         //     break;
      
         case GET_CATEGORIES:
-            for (let item in payload){
-               SessionSpecificMyModel.create(Object.assign({}, payload[item]));
+            for (let item in payload.categories){
+                debugger;
+               SessionSpecificMyModel.create(Object.assign({}, payload.categories[item]));
             }
             break;
         

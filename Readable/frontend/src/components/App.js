@@ -6,7 +6,7 @@ import { muiStyle } from '../utils/constants'
 import Category from '../components/category/Category'
 import { Posts } from '../components/post/Posts'
 import Post from '../components/post/Post';
-import {NoMatch} from '../components/common/NoMatch';
+import { NoMatch } from '../components/common/NoMatch';
 import { Link } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -36,23 +36,23 @@ class App extends Component {
   onSortChange = (sortBy) => {
     this.props.selectSortBy(sortBy)
   }
-  checkCategory =(cat)=>{
-    if(cat==="/all"){
+  checkCategory = (cat) => {
+    if (cat === "/all") {
       return true;
     }
-    if(this.props.categories!=undefined){
-      
-    var s = Object.values(this.props.categories).filter((item)=>"/"+item.name===cat);
-    return s.length>0;
-  }
-  return false;
+    if (this.props.categories != undefined) {
+
+      var s = Object.values(this.props.categories).filter((item) => "/" + item.name === cat);
+      return s.length > 0;
+    }
+    return false;
   }
   render() {
     const muiTheme = getMuiTheme(muiStyle);
     const {categories, posts, selectedCategory, sortBy} = this.props;
     return <Router>
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div> <AppBar style={{ position: 'fixed' }} title={<Link style={{ color: "#fff" }} to="/">Chit Chat</Link>} showMenuIconButton={false} />
+        <div> <AppBar style={{ position: 'fixed' }} title={<Link style={{ color: "#fff" }} onClick={(e) => { this.onCategorySelect(null, "") }} to="/all">Chit Chat</Link>} showMenuIconButton={false} />
 
           <Category selectedCategory={selectedCategory} OnCategorySelect={this.onCategorySelect} categories={categories}></Category>
           <Switch>
@@ -74,12 +74,12 @@ class App extends Component {
 
                   <Post fetchComments={this.fetchComments} isDetailPage={true} item={posts.filter((op) => op.id === match.params.id)[0]}
                     onDelete={() => { history.push("/all") }} >
-                   
+
                   </Post>
                   : <NoMatch></NoMatch>}
               </div>
             )} />
-  <Route component={NoMatch}/>
+            <Route component={NoMatch} />
           </Switch>
           <FloatingActionButton href="/newpost" style={{ position: 'fixed', bottom: '40px', right: '60px' }}>
             <ContentAdd />

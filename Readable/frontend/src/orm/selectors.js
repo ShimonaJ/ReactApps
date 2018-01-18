@@ -65,6 +65,6 @@ export const categories = createSelector(
 
         // `.toRefArray` returns a new Array that includes
         // direct references to each User object in the state.
-        return session.Category.all().toRefArray()[0];
+        return session.Category.all().toRefArray();
     })
 );

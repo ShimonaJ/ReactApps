@@ -2,6 +2,7 @@ import React from 'react'
 import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types'
 const CommentForm = (props) => {
     let { editItem, updateField,  onUpdate} = props;
     return <Paper style={{ marginBottom: 10, padding: 15, display: 'flex', flexWrap: 'wrap' }}>
@@ -13,5 +14,11 @@ const CommentForm = (props) => {
         
         <FlatButton onClick={onUpdate} label="Submit" primary={true}  />
         </Paper>
+}
+CommentForm.propTypes = {
+        editItem: PropTypes.object,
+        updateField: PropTypes.func.isRequired,
+        onUpdate: PropTypes.func.isRequired
+        
 }
 export default CommentForm

@@ -30,7 +30,7 @@ export default class TopToolbar extends Component {
       <Toolbar>
         <ToolbarGroup>
            <ToolbarTitle text= {title} />
-            </ToolbarGroup>
+            </ToolbarGroup> 
              {showBack? <ToolbarGroup>
             
              <Link  to="/">Back</Link></ToolbarGroup>:
